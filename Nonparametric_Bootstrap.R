@@ -45,14 +45,14 @@ for(i in 1:length(samples)){
   # get stats 
   median = apply(boots,2,median)
   mean = apply(boots,2,mean)
-  sd = apply(boots,2,se)
+  se = apply(boots,2,sd)
   lci = apply(boots,2,quantile,c(0.025))
   uci = apply(boots,2,quantile,c(0.975))
   
   org_diff_mean <- diff(tapply(dat$density,dat$type,mean))
   org_diff_median <- diff(tapply(dat$density,dat$type,median))
   
-  out = data.frame(sample=samples[i],type=types, mean,median,sd,lci,uci,`p(out<inside)` = c(mean(median_diff > org_diff_median)))
+  out = data.frame(sample=samples[i],type=types, mean,median,se,lci,uci,`p(out<inside)` = c(mean(median_diff > org_diff_median)))
   results = rbind(results,out)
   
   cols = c(4,2,3,5,6,7)
